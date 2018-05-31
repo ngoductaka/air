@@ -1,0 +1,79 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title
+    script(type='text/javascript', src='/javascripts/jquery-3.1.1.min.js')
+    script(type='text/javascript', src='/javascripts/jquery-ui.min.js')
+    script(type='text/javascript', src='/javascripts/jquery-3.1.1.min.js')
+    script(type='text/javascript', src='/javascripts/2048.js')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='/stylesheets/2048.css')
+
+    //- script(src='lib/jquery-3.1.1.min.js')
+    //- script(src='lib/jquery-ui.min.js')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    //- link(href='lib/bootstrap.min.css', rel='stylesheet')
+    //- link(rel='stylesheet', href='lib/2048.css')
+    //- script(src='lib/2048.js', type='text/javascript', charset='utf-8', async='', defer='')
+    //- // <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+    //- // <script type="text/javascript" src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+  body
+    .container
+      .row
+        #start.text-center
+          p.col-md-6.col-md-offset-3 biết chơi chưa ?
+          p.col-md-6.col-md-offset-3 ấn mũi tên trên bàn phím để chơi
+        #fail.text-center
+          p.col-md-6.col-md-offset-3 thua rồi má 
+          p.col-md-6.col-md-offset-3 ấn mũi tên trên bàn phím để xem lại
+          .clearfix
+          button#next.btn-default.col-md-3.col-md-offset-3  chơi lại 
+          button#back.btn-primary.col-md-3(onclick="location.href='https://www.facebook.com/profile.php?id=100006364240644' ")  méo chơi nữa
+        .col-md-6.col-md-offset-3
+          #table
+            .row.text-center
+              .col-md-3
+                ul.list-group.list-unstyled.list-unstyled
+                  li
+                    input#00(type='text', name='', value='0', placeholder='')
+                  li
+                    input#10(type='text', name='', value='0', placeholder='')
+                  li
+                    input#20(type='text', name='', value='0', placeholder='')
+                  li
+                    input#30(type='text', name='', value='0', placeholder='')
+              .col-md-3
+                ul.list-group.list-unstyled
+                  li
+                    input#01(type='text', name='', value='0', placeholder='')
+                  li
+                    input#11(type='text', name='', value='0', placeholder='')
+                  li
+                    input#21(type='text', name='', value='0', placeholder='')
+                  li
+                    input#31(type='text', name='', value='0', placeholder='')
+              .col-md-3
+                ul.list-group.list-unstyled
+                  li
+                    input#02(type='text', name='', value='0', placeholder='')
+                  li
+                    input#12(type='text', name='', value='0', placeholder='')
+                  li
+                    input#22(type='text', name='', value='0', placeholder='')
+                  li
+                    input#32(type='text', name='', value='0', placeholder='')
+              .col-md-3
+                ul.list-group.list-unstyled
+                  li
+                    input#03(type='text', name='', value='0', placeholder='')
+                  li
+                    input#13(type='text', name='', value='0', placeholder='')
+                  li
+                    input#23(type='text', name='', value='0', placeholder='')
+                  li
+                    input#33(type='text', name='', value='0', placeholder='')
+            // end div row
+          // end div id = table

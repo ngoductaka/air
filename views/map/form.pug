@@ -1,0 +1,31 @@
+doctype html
+html
+  body
+    form(action='/form', method = "POST")
+      
+      | pm:
+      br
+      input(type='text', name='pm_2_5')
+      br
+      |   temperature:
+      br
+      input(type='text', name='temperature')
+      br
+      |   humidity:
+      br
+      input(type='text', name='humidity')
+      br
+      //- 
+      | lat:
+      br
+      input(type='text', name='lat')
+      br
+      | lng:
+      br
+      input(type='text', name='lng')
+      br
+      //- 
+      br
+      input(type='submit', value='Submit')
+    p
+      

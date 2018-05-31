@@ -1,0 +1,64 @@
+doctype html
+html
+  include ./head
+  body
+      form#waterform(action = "/form", method = "POST")
+            h1#hh add new point
+            #fish.fish
+            #fish2.fish
+            //- form#waterform(method='post')
+            #name-form.formgroup
+                  label(for='name') id
+                  input#name(type='text', name='id')
+            #name-form.formgroup 
+                  label(for='name') location (lat)
+                  input#name(type='text', name='lat')
+            #name-form.formgroup
+                  label(for='name') location (lng)
+                  input#name(type='text', name='lng')
+            #name-form.formgroup
+                  label(for='name') pm_2_5
+                  input#name(type='text', name='pm_2_5')
+            #name-form.formgroup
+                  label(for='name') temperature
+                  input#name(type='text', name='temperature')
+            #name-form.formgroup
+                  label(for='name') humidity
+                  input#name(type='text', name='humidity')
+            //- #name-form.formgroup
+            //-       label(for='name') location (lng)
+            //-       input#name(type='text', name='ln')
+            
+
+            //- #email-form.formgroup
+            //-       label(for='email') Your e-mail*
+            //-       input#email(type='email', name='email')
+            //- #message-form.formgroup
+            //-       label(for='message') Your message
+            //-       textarea#message(name='message')
+            input(type='submit', value='Send your message!')
+
+            //- div
+            //-       label(for = "id") id: 
+            //-       input(name = "id")
+            //- br
+            //- div
+            //-       label(for = "age") location: 
+            //-       label(for = "age") lat: 
+            //-       input(name = "lat")
+            //-       label(for = "age") lng: 
+            //-       input(name = "lng")
+            //- br
+            //- div
+            //-       label(for = "name") pm_2_5: 
+            //-       input(name = "pm_2_5")
+            //- br
+            //- div
+            //-       label(for = "name") temperature: 
+            //-       input(name = "temperature")
+            //- br
+            //- div
+            //-       label(for = "name") humidity: 
+            //-       input(name = "humidity")
+            //- br
+            //- button(type = "submit") Create new person

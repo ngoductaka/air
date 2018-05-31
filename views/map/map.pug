@@ -1,0 +1,263 @@
+doctype html
+html
+  include ./head
+  body
+    div(class='wrap')
+      h1 Test map
+      a(href='/form') create new point
+      .row
+        // button
+        button#btn.btn.btn-info.pull-right(type='button') your location
+        // map
+        .span11
+          #map
+      script.
+        //consvert data 
+        var obj = !{JSON.stringify(obj)};
+        console.log(obj);
+        //- draw map
+        var myLatLng  = {lat: 21.018951, lng: 105.843420};
+        var myLatLng1 = {lat: 21.019051, lng: 105.843520};
+        var map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 11,
+          center: myLatLng 
+        });
+        var marker = new google.maps.Marker({
+            //- position: {lat: obj[j].location.lat, lng: obj[j].location.lng},
+            position: myLatLng,
+            map:map,
+            icon: 'https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=medical|bb|'+ 1+'|fc0230|000000'  
+
+        });
+        var marker = new google.maps.Marker({
+            //- position: {lat: obj[j].location.lat, lng: obj[j].location.lng},
+            position: myLatLng1,
+            map:map,
+            icon: 'https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=medical|bb|'+ 2+'|fc0230|000000'  
+
+        });
+        for (var j = 0; j < obj.length; j++) {
+          //- console.log(obj[j].location.lng);
+          var la = obj[j].location.lat;
+          var ln = obj[j].location.lng;
+          console.log(typeof(ln));
+          var marker = new google.maps.Marker({
+              //- position: {lat: obj[j].location.lat, lng: obj[j].location.lng},
+              position: {lat: Number(la), lng: Number(ln) },
+              map:map,
+              icon: 'https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=medical|bb|'+ obj[j]['pm_2_5']+'|fc0230|000000'  
+
+          });
+
+          var pm=[
+                [{v: [0, 0, 0], f: '0 '}, 100],
+                [{v: [1, 0, 0], f: '1 '}, 10],
+                [{v: [2, 0, 0], f: '2 '}, 10],
+                [{v: [3, 0, 0], f: '3 '}, 20],
+                [{v: [4, 0, 0], f: '4 '}, 30],
+                [{v: [5, 0, 0], f: '5 '}, 40],
+                [{v: [6, 0, 0], f: '6 '}, 50],
+                [{v: [7, 0, 0], f: '7 '}, 60],
+                [{v: [8, 0, 0], f: '8 '}, 70],
+                [{v: [9, 0, 0], f: '9 '}, 80],
+                [{v: [10, 0, 0], f: '10'}, 90],
+                [{v: [11, 0, 0], f: '11'}, 10],
+                [{v: [12, 0, 0], f: '12'}, 10],
+                [{v: [13, 0, 0], f: '13'}, 10],
+                [{v: [14, 0, 0], f: '14'}, 20],
+                [{v: [15, 0, 0], f: '15'}, 30],
+                [{v: [16, 0, 0], f: '16'}, 40],
+                [{v: [17, 0, 0], f: '17'}, 50],
+                [{v: [18, 0, 0], f: '18'}, 60],
+                [{v: [19, 0, 0], f: '19'}, 70],
+                [{v: [20, 0, 0], f: '20'}, 80],
+                [{v: [21, 0, 0], f: '21'}, 90],
+                [{v: [22, 0, 0], f: '22'}, 10],
+                [{v: [23, 0, 0], f: '23'}, 10],
+                //- [{v: [24, 0, 0], f: '0 '}, 100],
+                
+              ];
+          var t=[
+                [{v: [0, 0, 0], f: '0 '}, 15],
+                [{v: [1, 0, 0], f: '1 '}, 10],
+                [{v: [2, 0, 0], f: '2 '}, 10],
+                [{v: [3, 0, 0], f: '3 '}, 20],
+                [{v: [4, 0, 0], f: '4 '}, 20],
+                [{v: [5, 0, 0], f: '5 '}, 20],
+                [{v: [6, 0, 0], f: '6 '}, 25],
+                [{v: [7, 0, 0], f: '7 '}, 25],
+                [{v: [8, 0, 0], f: '8 '}, 26],
+                [{v: [9, 0, 0], f: '9 '}, 28],
+                [{v: [10, 0, 0], f: '10'}, 28],
+                [{v: [11, 0, 0], f: '11'}, 33],
+                [{v: [12, 0, 0], f: '12'}, 31],
+                [{v: [13, 0, 0], f: '13'}, 30],
+                [{v: [14, 0, 0], f: '14'}, 29],
+                [{v: [15, 0, 0], f: '15'}, 28],
+                [{v: [16, 0, 0], f: '16'}, 28],
+                [{v: [17, 0, 0], f: '17'}, 27],
+                [{v: [18, 0, 0], f: '18'}, 26],
+                [{v: [19, 0, 0], f: '19'}, 26],
+                [{v: [20, 0, 0], f: '20'}, 25],
+                [{v: [21, 0, 0], f: '21'}, 20],
+                [{v: [22, 0, 0], f: '22'}, 20],
+                [{v: [23, 0, 0], f: '23'}, 10],
+                //- [{v: [24, 0, 0], f: '0 '}, 100],
+                
+              ];
+          marker.addListener('click', function() {
+            drawChart(this,pm,t);
+            map.setZoom(14);
+            map.setCenter(marker.getPosition());
+          });
+        }
+        google.load('visualization', '1.0', {'packages':['corechart']});
+
+
+
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawChart);
+        // ----------------------------------------------------------------------------------------------function drawn
+        //- dnd : data pm2.5
+        //- t data nhiet do 
+        function drawChart(marker,dnd,t) {
+
+          // Create the data table.
+          var data = new google.visualization.DataTable();
+              data.addColumn('timeofday', 'Time of Day');
+              data.addColumn('number', 'rate');
+
+              //- data.addColumn('human', 'fdf');
+              var dd = dnd?dnd : [];
+              data.addRows(dd);
+
+          var t = t?t : [];
+          var deta = new google.visualization.DataTable();
+              deta.addColumn('timeofday', 'Time of Day');
+              deta.addColumn('number', 'rate');
+              //- data.addColumn('human', 'fdf');
+              deta.addRows(t);
+          
+              var options = {
+                //- width: 600,
+                //- height: 220,
+                title: 'PM2.5 Level  the Day',
+                animation: {
+                  duration: 2000,
+                  startup: true //This is the new option
+                },
+                //- backgroundColor:'black',
+                hAxis: {
+                  title: 'Time of Day 20/11/2017',
+                  //- format: 'h:mm a',
+                  format: 'k:m ',
+                  //- format: 'number',
+                  //- ticks: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 23],
+                  viewWindow: {
+                    min: [0, 0, 0],
+                    max: [23, 0, 23]
+                  }
+                },
+                
+                vAxis: {
+                  title: 'Rating (scale of 1-100)',
+                  ticks: [0, 10, 20, 40, 60, 80, 100]
+                  
+                }
+              };
+              //- ----+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+              var options_t = {
+                //- width: 600,
+                //- height: 220,
+                title: 'temperature Level  the Day',
+                animation: {
+                  duration: 2000,
+                  startup: true //This is the new option
+                },
+                //- backgroundColor:'',
+                series: {
+                  0: { color: '#e2431e' }
+                },
+                hAxis: {
+                  title: 'Time of Day 20/11/2017',
+                  //- format: 'h:mm a',
+                  format: 'k:m ',
+                  //- format: 'number',
+                  //- ticks: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, 23],
+                  viewWindow: {
+                    min: [0, 0, 0],
+                    max: [23, 0, 23]
+                  }
+                },
+                
+                vAxis: {
+                  title: 'Rating (scale of 1-60)',
+                  ticks: [0, 10, 20, 40, 60]
+                  
+                }
+              };
+
+                        
+          var node_pm       = document.createElement('div'),
+              node_t        = document.createElement('div'),
+              parentDiv     = document.createElement('div'),
+              //- content       = document.createElement('')
+
+              infoWindow    = new google.maps.InfoWindow(),
+
+              chart_pm      = new google.visualization.ColumnChart(node_pm),
+              chart_t       = new google.visualization.ColumnChart(node_t);
+
+          parentDiv.appendChild(node_pm);
+          parentDiv.appendChild(node_t);
+
+          chart_pm.draw(data, options);
+          chart_t.draw(deta, options_t);
+
+          infoWindow.setContent(parentDiv);
+          try 
+          {
+              infoWindow.open(marker.getMap(),marker);
+          }
+          catch(e)
+          {
+              console.log(e);
+          }
+        }
+        // -------------------------------------------------------------------------------------btn -------------------------
+        $( "#btn" ).click(function() {
+            console.log(1111111);
+            navigator.geolocation.getCurrentPosition(function(po){
+              console.log(po.coords.latitude + po.coords.longitude);
+              console.log(22222222);
+              //- var lat 
+              // move map
+              map.setCenter({
+                lat: po.coords.latitude,
+                lng: po.coords.longitude
+              });
+              var marker1 = new google.maps.Marker({
+                  //- position: {lat: obj[j].location.lat, lng: obj[j].location.lng},
+                position: {lat: Number(po.coords.latitude), lng: Number(po.coords.longitude) },
+                map:map,
+                icon: 'http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.9|0|2BEC5F|10|b|'  + 44
+
+              });
+              marker1.addListener('click', function() {
+                drawChart(this,pm);
+                map.setZoom(14);
+                map.setCenter(marker1.getPosition());
+              });
+              // add maker
+              //- map.addMarker({
+              //-   lat: po.coords.latitude,
+              //-   lng: po.coords.longitude,
+              //-   title: 'your location',
+              //-   zoom : 30,
+              //-   infoWindow: {
+              //-     content: '<p>local:  ' +po.coords.latitude+' ::'+ po.coords.longitude +' </p>  <p> pm2.5 :' +205 +' and temp :'+ 1 +' </p> '
+              //-   },
+              //-   icon: 'http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.9|0|2BEC5F|10|b|'  + 44
+              //- });// add maker
+            });//loadlocation
+          }); // click()

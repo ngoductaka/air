@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ngoc duc first map</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+  <script type="text/javascript" src="./gmaps.js"></script>
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/stylesheets/examples.css" />
+  <!-- link(rel='stylesheet', href='/stylesheets/style.css') -->
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+</head>
+<body>
+  <h1>Test map</h1>
+  <div class="row">
+    <!-- button -->
+    <button type="button" id="btn" class="btn btn-info pull-right">your location</button>
+    <!-- map -->
+    <div class="span11">
+      <div id="map"></div>
+    </div>
+  </div>
+  <!-- js -->
+  <script type="text/javascript">
+     
+
+    var obj = [
+    {"id":1,"location":{"lat": 21.040310,"lng" : 105.836980},"pm_2.5":2.1,"temperature":40,"humidity":60},
+    {"id":2,"location":{"lat": 21.03905,"lng" : 105.847527},"pm_2.5":1.1,"temperature":20,"humidity":40},
+    {"id":3,"location":{"lat": 21.01951,"lng" : 105.84420},"pm_2.5":2.4,"temperature":40,"humidity":43},
+    {"id":4,"location":{"lat": 21.08951,"lng" : 105.43420},"pm_2.5":2.12,"temperature":27,"humidity":64},
+    {"id":5,"location":{"lat": 21.08981,"lng" : 105.43429},"pm_2.5":2.12,"temperature":27,"humidity":55},
+
+    ];  
+    // console.log( obj.length);
+    var map;
+    var companyLat = 21.018951, companyLng = 105.843420;
+    var x = 1;
+    // 
+    $(document).ready(function(){
+      // create map
+      // #map 
+      map = new GMaps({
+        el: '#map',
+        lat: companyLat,
+        lng: companyLng,
+        zoom : 14,
+      });
+      // add point
+      for (var j = 0; j < obj.length; j++) {
+        // console.log(obj[j]['pm_2.5']);
+        map.addMarker({
+          lat: obj[j].location.lat,
+          lng: obj[j].location.lng,
+          title: 'Marker with InfoWindow',
+          infoWindow: {
+            content: '<p>local:  ' +obj[j].location.lat+' ::'+ obj[j].location.lng +' </p>'+
+                     '  <p> PM2.5 :' + obj[j]['pm_2.5'] +' </p> '+
+                     '  <p> temperature :' + obj[j].temperature+' </p> '+
+                     '  <p> humidity :' + obj[j].humidity+'% </p> '
+          }
+        });
+      }
+      // get location 
+      $( "#btn" ).click(function() {
+        navigator.geolocation.getCurrentPosition(function(po){
+          // move map
+          map.setCenter(po.coords.latitude,po.coords.longitude);
+          // add maker
+          map.addMarker({
+            lat: po.coords.latitude,
+            lng: po.coords.longitude,
+            title: 'your location',
+            zoom : 30,
+            infoWindow: {
+              content: '<p>local:  ' +obj.propety1+' ::'+ companyLng +' </p>  <p> pm2.5 :' +x +' and temp :'+ x +' </p> '
+            }
+          });// add maker
+
+        });//loadlocation
+      }); // click()
+     
+
+    });
+  </script>
+</body>
+</html>
