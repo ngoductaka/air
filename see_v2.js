@@ -126,14 +126,28 @@ app.post('/pm25', async (req, res) => {
   }
 });
 // ================================================================
-app.get('/user', async (req, res) => {
+app.post('/user', async (req, res) => {
   try {
-    const dataUser = await getDataUser();
-    const data = mapData(dataUser.data);
-    const dataConvert = convertData(data);
-    res.render('map/map_v2', {
-      obj: dataConvert
-    });
+    const allUser = await getDataUser();
+    const dataUser =  allUser.find(e =>e.user.api_key === req.body.key)
+    console.log(dataUser);
+    if (!dataUser) res.render('login/notFound');
+    else {
+      const data = mapData(dataUser.data);
+      const dataConvert = convertData(data);
+      res.render('map/map_v2', {
+        obj: dataConvert
+      });
+    }
+  }
+  catch (err) {
+    console.log("err in POST /pm25", err);
+  }
+});
+// ================================================================
+app.get('/login', async (req, res) => {
+  try {
+    res.render('login');
   }
   catch (err) {
     console.log("err in POST /pm25", err);

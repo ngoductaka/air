@@ -2,7 +2,7 @@ var User = require('./connect');
 
 function getData(query = {}) {
     return new Promise((resolve, reject) => {
-        User.findOne(query, function(err, ress) { // map is 
+        User.find(query, function(err, ress) { // map is 
             if(err) {console.log(err);reject(err)}
             resolve(ress); 
         }) }
