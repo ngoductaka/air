@@ -22,6 +22,8 @@ const saveDataUser = require('./models/user/saveData');
 const userToday = require('./models/user/getToday');
 const convertuserToday = require('./models/user/convertToday');
 const userController = require('./controller/userController');
+const Controller = require('./controller/userControllerv3');
+const mapData = require('./models/user/mapData');
 
 // const liv = require('./models/v2/liv')
 const moment = require('moment');
@@ -46,6 +48,7 @@ app.use(express.static(__dirname + '/public'));
 app.get('/map', async (req, res) => {
   getData()
     .then((data) => { // all data in collection
+      // res.json(data)
       let dataConvert = convertData(data);
       res.render('map/map_v2', {
         obj: dataConvert
@@ -123,6 +126,19 @@ app.post('/pm25', async (req, res) => {
   }
 });
 // ================================================================
+app.get('/user', async (req, res) => {
+  try {
+    const dataUser = await getDataUser();
+    const data = mapData(dataUser.data);
+    const dataConvert = convertData(data);
+    res.render('map/map_v2', {
+      obj: dataConvert
+    });
+  }
+  catch (err) {
+    console.log("err in POST /pm25", err);
+  }
+});
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log("listen on post " + PORT));
 // app.listen(80,()=>console.log("listen on post 5000"));

@@ -17,7 +17,7 @@ const db = mongoose.connection;
 const mapSchema = mongoose.Schema({
     user: {
         name: String,
-        api_key: Number,
+        api_key: String,
     },
     data: [{
         pm_2_5: Number,
